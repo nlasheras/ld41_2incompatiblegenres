@@ -110,6 +110,6 @@ public class GameArea : MonoBehaviour
 				}
 			}
 		}
-		currentPiece.setPos(0, 19);
+		currentPiece.setPos(Random.Range(0, 10-4), 18);
 	}
 }
