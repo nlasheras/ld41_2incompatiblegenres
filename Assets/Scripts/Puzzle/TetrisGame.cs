@@ -29,7 +29,7 @@ public class TetrisGame : MonoBehaviour
 			currentPiece = nextPiece;
 			gameArea.show(currentPiece);
 			nextPiece = getRandomPiece();
-			nextPiece.setPos(9, 29);
+			nextPiece.setPos(9, 27);
 		}
 
 		tickTime -= Time.deltaTime;
@@ -43,28 +43,51 @@ public class TetrisGame : MonoBehaviour
 		}
 	}
 
+	void onKeyDown()
+	{
+		if (gameArea.canOffset(currentPiece, 0, -1))
+			currentPiece.setPos(currentPiece.col, currentPiece.row - 1);
+		else {
+			gameArea.join(currentPiece);
+			gameArea.tick(); // NL: force update of pieces
+			currentPiece = null;
+		}
+	}
+
+	private static float KEY_DOWN_REPEAT_TIME = 0.05f; 
+	private float repeatKeyDown = 0.0f;
 	void processInput()
 	{
-		if (Input.GetKeyDown(KeyCode.LeftArrow) && gameArea.canOffset(currentPiece, -1, 0))
-		{
+		if (Input.GetKeyDown(KeyCode.LeftArrow) && gameArea.canOffset(currentPiece, -1, 0)) {
 			currentPiece.setPos(currentPiece.col - 1, currentPiece.row);
 		}
-		if (Input.GetKeyDown(KeyCode.RightArrow) && gameArea.canOffset(currentPiece, 1, 0))
-		{
+		if (Input.GetKeyDown(KeyCode.RightArrow) && gameArea.canOffset(currentPiece, 1, 0)) {
 			currentPiece.setPos(currentPiece.col + 1, currentPiece.row);
 		}
-		if (Input.GetKeyDown(KeyCode.DownArrow) && gameArea.canOffset(currentPiece, 0, -1))
-		{
-			currentPiece.setPos(currentPiece.col, currentPiece.row - 1);
+		if (Input.GetKey(KeyCode.DownArrow)) {
+			repeatKeyDown -= Time.deltaTime;
+			if (repeatKeyDown < 0.0f) {
+				onKeyDown();
+				repeatKeyDown = KEY_DOWN_REPEAT_TIME;
+			}
+		} else {
+			repeatKeyDown = KEY_DOWN_REPEAT_TIME;
 		}
 
-		if (Input.GetKeyDown(KeyCode.Space))
-		{
+		if (Input.GetKeyDown(KeyCode.UpArrow)) {
 			currentPiece.rotate(1);
 			if (!gameArea.canOffset(currentPiece, 0, 0))
 			{
 				currentPiece.rotate(-1);
 			}
+		}
+
+		if (Input.GetKeyDown(KeyCode.Space)) {
+			while (gameArea.canOffset(currentPiece, 0, -1))
+				currentPiece.setPos(currentPiece.col, currentPiece.row - 1);
+			gameArea.join(currentPiece);
+			gameArea.tick(); // NL: force update of pieces
+			currentPiece = null;
 		}
 	}
 
@@ -74,12 +97,13 @@ public class TetrisGame : MonoBehaviour
 	}
 
 	private void tick() {
-		currentPiece.tick();
 
-		if (gameArea.isGrounded(currentPiece))
-		{
+		if (gameArea.isGrounded(currentPiece)) {
 			gameArea.join(currentPiece);
 			currentPiece = null;
+		} else {
+			if (!Input.GetKeyDown(KeyCode.DownArrow))
+				currentPiece.tick();
 		}
 
 		gameArea.tick();

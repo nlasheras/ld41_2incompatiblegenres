@@ -65,10 +65,10 @@ public class GameArea : MonoBehaviour
 				Block pieceBlock = piece.getBlock(i, j);
 				if (pieceBlock) {
 					int col = piece.col + i + x;
-					if (col < 0 || col > width) {
+					if (col < 0 || col >= width) {
 						return false;
 					}
-					if (row < 0 || row > height) {
+					if (row < 0 || row >= height) {
 						return false;
 					}
 					Block areaBlock = getBlock(col, row);
@@ -110,6 +110,6 @@ public class GameArea : MonoBehaviour
 				}
 			}
 		}
-		currentPiece.setPos(0, 19);
+		currentPiece.setPos(Random.Range(0, 10-4), 18);
 	}
 }

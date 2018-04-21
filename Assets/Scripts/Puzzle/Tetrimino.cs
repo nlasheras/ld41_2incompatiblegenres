@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -15,7 +16,6 @@ public class Tetrimino
 		SHAPE_S,
 		SHAPE_T, 
 		SHAPE_Z,
-		SHAPE_COUNT
 	}
 
 	public enum Rotation
@@ -103,9 +103,9 @@ public class Tetrimino
 
 	private int getBlockIndexUsingRotation(int col, int row) {
 		switch (rotation) {
-			case Rotation.ROTATION_90: return col * 4 + row;
-			case Rotation.ROTATION_180: return row * 4 + (3 - col); 
-			case Rotation.ROTATION_270: return col * 4 + (3 - row);
+			case Rotation.ROTATION_90: return col * 4 + (3 - row);
+			case Rotation.ROTATION_180: return (3-row) * 4 + (3 - col); 
+			case Rotation.ROTATION_270: return (3-col) * 4 + row;
 		}
 		return row * 4 + col;
 	}
@@ -115,12 +115,37 @@ public class Tetrimino
 		return blocks[index];
 	}
 
+	private int rotateOffsetX = 0;
+	private int rotateOffsetY = 0;
 	public void rotate(int direction)
 	{
 		int newRotate = (int)rotation + direction;
 		if (newRotate < (int)Rotation.ROTATION_0) rotation = Rotation.ROTATION_270;
 		else if (newRotate > (int) Rotation.ROTATION_270) rotation = Rotation.ROTATION_0;
 		else rotation = (Rotation) (newRotate);
-		UpdateBlocksPosition();
+
+		setPos(col - rotateOffsetX, row - rotateOffsetY);
+
+		switch (rotation)
+		{
+			case Rotation.ROTATION_0:
+				rotateOffsetX = 0;
+				rotateOffsetY = 0;
+				break;
+			case Rotation.ROTATION_90:
+				rotateOffsetX = 1;
+				rotateOffsetY = -2;
+				break;
+			case Rotation.ROTATION_180:
+				rotateOffsetX = -1;
+				rotateOffsetY = -3;
+				break;
+			case Rotation.ROTATION_270:
+				rotateOffsetX = -2;
+				rotateOffsetY = -1;
+				break;
+		}
+		
+		setPos(col + rotateOffsetX, row + rotateOffsetY);
 	}
 }
