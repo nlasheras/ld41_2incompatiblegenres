@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4189081273979552}
   - component: {fileID: 212535160826814922}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36,7 +36,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4754523898825666}
   - component: {fileID: 114526829253873932}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: BlockPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
