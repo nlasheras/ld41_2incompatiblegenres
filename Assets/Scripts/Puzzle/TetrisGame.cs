@@ -53,9 +53,15 @@ public class TetrisGame : MonoBehaviour
 		{
 			currentPiece.setPos(currentPiece.col + 1, currentPiece.row);
 		}
-		if (Input.GetKeyDown(KeyCode.DownArrow) && gameArea.canOffset(currentPiece, 0, -1))
+		if (Input.GetKeyDown(KeyCode.DownArrow))
 		{
-			currentPiece.setPos(currentPiece.col, currentPiece.row - 1);
+			if (gameArea.canOffset(currentPiece, 0, -1))
+				currentPiece.setPos(currentPiece.col, currentPiece.row - 1);
+			else {
+				gameArea.join(currentPiece);
+				gameArea.tick(); // NL: force update of pieces
+				currentPiece = null;
+			}
 		}
 
 		if (Input.GetKeyDown(KeyCode.Space))
@@ -74,12 +80,12 @@ public class TetrisGame : MonoBehaviour
 	}
 
 	private void tick() {
-		currentPiece.tick();
 
-		if (gameArea.isGrounded(currentPiece))
-		{
+		if (gameArea.isGrounded(currentPiece)) {
 			gameArea.join(currentPiece);
 			currentPiece = null;
+		} else {
+			currentPiece.tick();
 		}
 
 		gameArea.tick();
