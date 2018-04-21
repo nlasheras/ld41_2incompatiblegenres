@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class GameArea : MonoBehaviour
 {
@@ -17,6 +18,39 @@ public class GameArea : MonoBehaviour
 	}
 
 	public void tick() {
+		for (int row = height - 1; row >= 0; --row)
+		{
+			bool fullLine = true;
+			for (int i = 0; i < width && fullLine; ++i)
+			{
+				if (getBlock(i, row) == null)
+					fullLine = false;
+			}
+
+			if (fullLine)
+			{
+				for (int i = 0; i < width; ++i) {
+					Block b = blocks[row * width + i];
+					if (b) {
+						GameObject.Destroy(b.gameObject);
+					}
+				}
+
+				for (int j = row + 1; j < height; ++j) {
+					for (int i = 0; i < width; ++i) {
+						Block b = blocks[j * width + i];
+						blocks[(j - 1) * width + i] = b;
+						if (b) {
+							b.SetPos(i, j-1);
+						}
+					}
+				}
+
+				for (int i = 0; i < width; ++i) {
+					blocks[(height-1) * width + i] = null;
+				}
+			}
+		}
 
 	}
 
@@ -31,8 +65,12 @@ public class GameArea : MonoBehaviour
 				Block pieceBlock = piece.getBlock(i, j);
 				if (pieceBlock) {
 					int col = piece.col + i + x;
-					if (col < 0 || col > width) return false;
-					if (row < 0 || row > height) return false;
+					if (col < 0 || col > width) {
+						return false;
+					}
+					if (row < 0 || row > height) {
+						return false;
+					}
 					Block areaBlock = getBlock(col, row);
 					if (areaBlock != null) {
 						return false;
