@@ -20,7 +20,7 @@ public class Base : MonoBehaviour {
 	void Update() {
 		tick -= Time.deltaTime;
 
-		if (tick < 0) {
+		if (tick < 0 && spawnRate != 0) {
 			tick = spawnRate;
 			spawnUnit();
 		}
@@ -38,9 +38,14 @@ public class Base : MonoBehaviour {
 		energy -= damage;
 
 		// TODO: Trigger damage receive info to other side
-		if (energy < 0) {
+		if (energy <= 0) {
 			// For now just destroy object. Will trigger event game over to other side
 			GameObject.Destroy(this.gameObject);
 		}
+	}
+
+	void OnTriggerEnter2D(Collider2D other) {
+		GameObject.Destroy(other.gameObject);
+		receiveDamage(10);
 	}
 }

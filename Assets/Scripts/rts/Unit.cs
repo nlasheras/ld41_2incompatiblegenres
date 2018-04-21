@@ -7,10 +7,13 @@ public class Unit : MonoBehaviour {
 	public int damage;
 
 	public float speed;
+
+	public GameObject enemyBase;
+
 	private Vector3 target;
 	// Use this for initialization
 	void Start() {
-		target = new Vector3(50.0f, 50.0f, 0.0f);
+
 	}
 
 	// Update is called once per frame
@@ -31,7 +34,7 @@ public class Unit : MonoBehaviour {
 	}
 
 	private void move() {
-		Vector3 toTarget = (target - transform.position).normalized;
+		Vector3 toTarget = (enemyBase.transform.position - transform.position).normalized;
 		float angle = Vector3.Angle(Vector3.up, toTarget);
 		transform.rotation = Quaternion.Euler(0, 0, -angle);
 		Vector3 forward = transform.TransformDirection(Vector3.up);
