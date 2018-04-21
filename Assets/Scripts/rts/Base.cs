@@ -26,12 +26,8 @@ public class Base : MonoBehaviour {
 	}
 
 	private void spawnUnit() {
-		Transform unitTransform = transform;
-		Vector3 temp = transform.position;
-		temp.y += 2;
-		unitTransform.position = temp;
-
-		Instantiate(unitPrefab, transform);
+		Vector3 temp =  new Vector3(transform.position.x, transform.position.y + 5, transform.position.z);
+		Instantiate(unitPrefab, temp, transform.rotation);
 	}
 
 	public void receiveDamage(int damage) {
