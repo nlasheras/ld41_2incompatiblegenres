@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4844132537848092}
   - component: {fileID: 114573530829157252}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Base
   m_TagString: Untagged
   m_Icon: {fileID: -4087464717476244675, guid: 0000000000000000d000000000000000, type: 0}
@@ -36,7 +36,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4156176986179604}
   - component: {fileID: 212686624513539036}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: baseSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -81,7 +81,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee2a23f6960544c4abfb8c223c342531, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unitPrefab: {fileID: 1966169534405962, guid: 9c40544fbbb8240f3be99c443fbd37bd, type: 2}
+  unitPrefab: {fileID: 1875188349111586, guid: 9c40544fbbb8240f3be99c443fbd37bd, type: 2}
   spawnRate: 2
   energy: 100
 --- !u!212 &212686624513539036

@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4967057389183014}
   - component: {fileID: 212347481399589390}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: unitSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36,7 +36,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4921707282362188}
   - component: {fileID: 114902710175114686}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Unit
   m_TagString: Untagged
   m_Icon: {fileID: -6431860639581277017, guid: 0000000000000000d000000000000000, type: 0}

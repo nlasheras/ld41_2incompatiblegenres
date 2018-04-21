@@ -29,7 +29,7 @@ public class TetrisGame : MonoBehaviour
 			currentPiece = nextPiece;
 			gameArea.show(currentPiece);
 			nextPiece = getRandomPiece();
-			nextPiece.setPos(10-4, 25-4);
+			nextPiece.setPos(9, 29);
 		}
 
 		tickTime -= Time.deltaTime;

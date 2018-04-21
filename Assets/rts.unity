@@ -242,7 +242,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 359824634}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.6, y: -11.7, z: 0.5}
+  m_LocalPosition: {x: 12.2, y: -11.7, z: 0.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2112035400}
@@ -258,7 +258,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4844132537848092, guid: 76732cf010a2f40078a0ad7d7012c03a, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 12.6
       objectReference: {fileID: 0}
     - target: {fileID: 4844132537848092, guid: 76732cf010a2f40078a0ad7d7012c03a, type: 2}
       propertyPath: m_LocalPosition.y
@@ -399,7 +399,7 @@ GameObject:
   m_Component:
   - component: {fileID: 850058750}
   - component: {fileID: 850058751}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -471,7 +471,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 860747070}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Target
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -536,19 +536,19 @@ Camera:
   m_BackGroundColor: {r: 0.39705884, g: 0.38296446, b: 0.3240701, a: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0
+    x: 0.4
     y: 0
-    width: 1
+    width: 0.6
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 30
+  orthographic size: 29.16
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 256
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
