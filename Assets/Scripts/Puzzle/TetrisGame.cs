@@ -19,7 +19,7 @@ public class TetrisGame : MonoBehaviour
 		nextPiece = getRandomPiece();
 		currentPiece = null;
 
-		gameArea = new GameArea();
+		gameArea = GetComponentInChildren<GameArea>();
 
 		tickTime = speed;
 	}
@@ -27,22 +27,37 @@ public class TetrisGame : MonoBehaviour
 	void Update() {
 		if (currentPiece == null) {
 			currentPiece = nextPiece;
+			gameArea.show(currentPiece);
 			nextPiece = getRandomPiece();
+			nextPiece.setPos(10-4, 25-4);
 		}
 
 		tickTime -= Time.deltaTime;
+
+		processInput();
 
 		if (tickTime < 0.0f)
 		{
 			tick();
 			tickTime = speed;
 		}
+	}
 
+	void processInput()
+	{
+		if (Input.GetKeyDown(KeyCode.LeftArrow))
+		{
+			currentPiece.setPos(currentPiece.col - 1, currentPiece.row);
+		}
+		if (Input.GetKeyDown(KeyCode.RightArrow))
+		{
+			currentPiece.setPos(currentPiece.col + 1, currentPiece.row);
+		}
 	}
 
 	private Tetrimino getRandomPiece() {
 		
-		return new Tetrimino();
+		return new Tetrimino(blockPrefab);
 	}
 
 	private void tick() {
@@ -50,8 +65,7 @@ public class TetrisGame : MonoBehaviour
 
 		if (gameArea.isGrounded(currentPiece))
 		{
-			gameArea.getBlocks(currentPiece);
-			GameObject.Destroy(currentPiece);
+			gameArea.join(currentPiece);
 			currentPiece = null;
 		}
 
