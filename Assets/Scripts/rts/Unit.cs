@@ -52,12 +52,12 @@ public class Unit : MonoBehaviour {
 	private void move() {
 		Vector3 toTarget = (target - transform.position).normalized;
 
-		// TODO: Fix angle to take into account direction
-		float angle = Vector3.Angle(Vector3.up, toTarget);
-		transform.rotation = Quaternion.Euler(0, 0, -angle);
+		float angle = Vector3.SignedAngle(Vector3.up, toTarget, transform.forward);
+		transform.rotation = Quaternion.Euler(0, 0, angle);
+
 		Vector3 forward = transform.TransformDirection(Vector3.up);
 		Vector3 lateral = transform.TransformDirection(Vector3.right);
-		transform.position += forward * 4 * Time.deltaTime;
+		transform.position += forward * speed * Time.deltaTime;
 		transform.position += lateral * Random.Range(-10.0f, 10.0f) * Time.deltaTime;
 	}
 }
