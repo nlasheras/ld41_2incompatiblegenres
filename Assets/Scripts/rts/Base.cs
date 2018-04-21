@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -25,9 +26,12 @@ public class Base : MonoBehaviour {
 		}
 	}
 
+	private static int instanceId = 0;
 	private void spawnUnit() {
 		Vector3 temp =  new Vector3(transform.position.x, transform.position.y + 5, transform.position.z);
-		Instantiate(unitPrefab, temp, transform.rotation);
+		GameObject go = Instantiate(unitPrefab, temp, transform.rotation);
+		go.name = String.Format("Unit_{0}", instanceId);
+		++instanceId;
 	}
 
 	public void receiveDamage(int damage) {

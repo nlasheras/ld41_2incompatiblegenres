@@ -10,7 +10,7 @@ public class Unit : MonoBehaviour {
 	private Vector3 target;
 	// Use this for initialization
 	void Start() {
-		target = new Vector3(50.0f, 100.0f, 0.0f);
+		target = new Vector3(50.0f, 50.0f, 0.0f);
 	}
 
 	// Update is called once per frame
@@ -31,7 +31,9 @@ public class Unit : MonoBehaviour {
 	}
 
 	private void move() {
-		transform.LookAt(target, Vector3.up);
-		transform.position += new Vector3(0, 2 * Time.deltaTime, 0);
+		Vector3 toTarget = (target - transform.position).normalized;
+		float angle = Vector3.Angle(Vector3.up, toTarget);
+		transform.rotation = Quaternion.Euler(0, 0, -angle);
+		transform.position += new Vector3(0, 5 * Time.deltaTime, 0);
 	}
 }
