@@ -34,6 +34,9 @@ public class Unit : MonoBehaviour {
 		Vector3 toTarget = (target - transform.position).normalized;
 		float angle = Vector3.Angle(Vector3.up, toTarget);
 		transform.rotation = Quaternion.Euler(0, 0, -angle);
-		transform.position += new Vector3(0, 5 * Time.deltaTime, 0);
+		Vector3 forward = transform.TransformDirection(Vector3.up);
+		Vector3 lateral = transform.TransformDirection(Vector3.right);
+		transform.position += forward * 4 * Time.deltaTime;
+		transform.position += lateral * Random.Range(-10.0f, 10.0f) * Time.deltaTime;
 	}
 }
