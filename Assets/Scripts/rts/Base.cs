@@ -19,6 +19,7 @@ public class Base : MonoBehaviour {
 	// Use this for initialization
 	void Start() {
 		tick = spawnRate;
+		GetComponentInChildren<SpriteRenderer>().sprite = getFactionSprite(faction);
 	}
 
 	// Update is called once per frame
@@ -32,7 +33,12 @@ public class Base : MonoBehaviour {
 	}
 
 	private static int instanceId = 0;
+
 	private void spawnUnit() {
+		if (energy < Unit.getUnitCost(faction)) {
+			return;
+		}
+
 		Vector3 temp =  new Vector3(transform.position.x, transform.position.y + getOffset(faction), transform.position.z);
 		GameObject go = Instantiate(unitPrefab, temp, transform.rotation);
 		go.name = String.Format("Unit_{0}", instanceId);
@@ -41,6 +47,20 @@ public class Base : MonoBehaviour {
 		unit.setTarget(target);
 
 		++instanceId;
+
+		receiveDamage(Unit.getUnitCost(faction));
+	}
+
+	private void setInitialEnergy(Faction faction) {
+		switch (faction) {
+			case Faction.FACTION_ALLIES:
+			energy = 200;
+			break;
+
+			case Faction.FACTION_ENEMIES:
+			energy = 500;
+			break;
+		}
 	}
 
 	private static float getOffset(Faction faction) {
@@ -93,6 +113,18 @@ public class Base : MonoBehaviour {
 		GetComponentInChildren<SpriteRenderer>().color = getFactionColor(faction);
 	}
 
+	private static Sprite getFactionSprite(Faction faction) {
+		switch (faction) {
+			case Faction.FACTION_ALLIES:
+				return Resources.Load("alliedBase", typeof(Sprite)) as Sprite;
+
+			case Faction.FACTION_ENEMIES:
+				return Resources.Load("enemyBase", typeof(Sprite)) as Sprite;
+		}
+
+		return null;
+	}
+
 	public Faction GetFaction() {
 		return this.faction;
 	}
@@ -106,7 +138,13 @@ public class Base : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D(Collider2D other) {
+		Unit unit = other.gameObject.GetComponent<Unit>();
+
+		if (unit.getFaction() == faction) {
+			return;
+		}
+
+		receiveDamage(unit.autodestruct);
 		GameObject.Destroy(other.gameObject);
-		receiveDamage(10);
 	}
 }
