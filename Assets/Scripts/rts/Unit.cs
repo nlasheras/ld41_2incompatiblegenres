@@ -20,6 +20,7 @@ public class Unit : MonoBehaviour {
 	// Use this for initialization
 	void Start() {
 		GetComponentInChildren<SpriteRenderer>().sprite = getFactionSprite(faction);
+		setInitialLife(faction);
 	}
 
 	// Update is called once per frame
@@ -73,6 +74,18 @@ public class Unit : MonoBehaviour {
 		Vector3 lateral = transform.TransformDirection(Vector3.right);
 		transform.position += forward * speed * Time.deltaTime;
 		transform.position += lateral * Random.Range(-10.0f, 10.0f) * Time.deltaTime;
+	}
+
+	private void setInitialLife(Faction faction) {
+		switch (faction) {
+			case Faction.FACTION_ALLIES:
+				life = 10;
+				break;
+
+			case Faction.FACTION_ENEMIES:
+				life = 15;
+				break;
+		}
 	}
 
 	private Sprite getFactionSprite(Faction faction) {

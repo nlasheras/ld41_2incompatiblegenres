@@ -109,8 +109,24 @@ public void notifyDamage(int damage) {
 		manager.onBaseDamaged(damage);
 	}
 }
-	public void replenishEnergy(int energy) {
-		this.energy += energy;
+	public void replenishEnergy(int count) {
+		int deltaEnergy = Unit.getUnitCost(faction);
+
+		switch (count) {
+			case 2:
+				deltaEnergy *= 2;
+				break;
+
+			case 3:
+				deltaEnergy *= 3;
+				break;
+
+			case 4:
+				deltaEnergy *= 5;
+				break;
+		}
+
+		this.energy += deltaEnergy;
 	}
 
 	public void spendEnergy(int energy) {
