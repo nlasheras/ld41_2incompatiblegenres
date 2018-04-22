@@ -163,16 +163,20 @@ public class Base : MonoBehaviour {
 	public void replenishEnergy(int count) {
 		int deltaEnergy = Unit.getUnitCost(faction);
 
+
+		spawnUnit();
 		switch (count) {
 			case 2:
-				deltaEnergy *= 2;
+				deltaEnergy *= 3;
 				break;
 
 			case 3:
+				spawnUnit();
 				deltaEnergy *= 3;
 				break;
 
 			case 4:
+				spawnUnit();
 				deltaEnergy *= 5;
 				break;
 		}

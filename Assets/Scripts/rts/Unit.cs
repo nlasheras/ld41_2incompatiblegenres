@@ -72,7 +72,7 @@ public class Unit : MonoBehaviour {
 
 	public static int getUnitCost(Faction faction) {
 		if (faction == Faction.FACTION_ALLIES) {
-			return 1;
+			return 2;
 		}
 
 		return 0;
@@ -93,11 +93,11 @@ public class Unit : MonoBehaviour {
 	private void setInitialLife(Faction faction) {
 		switch (faction) {
 			case Faction.FACTION_ALLIES:
-				life = 10;
+				life = 12;
 				break;
 
 			case Faction.FACTION_ENEMIES:
-				life = 15;
+				life = 10;
 				break;
 		}
 	}
