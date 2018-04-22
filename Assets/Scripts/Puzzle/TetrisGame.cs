@@ -153,10 +153,12 @@ public class TetrisGame : MonoBehaviour
 		}
 	}
 
-	public float speedIncreasePerDamage = 0.05f;
+	private float maxSpeedLosePerDamage = 0.8f;
+	private float lifeAtMaxDamage = 25.0f;
 	public void onBaseDamaged(int life) {
-		if (speed > speedIncreasePerDamage)
-			speed -= speedIncreasePerDamage;
+		float speedDamagePerLife = maxSpeedLosePerDamage / (100.0f - lifeAtMaxDamage);
+		float speedDamage = speedDamagePerLife * life;
+		speed = Mathf.Max(speed - speedDamage, 1.0f - maxSpeedLosePerDamage);
 	}
 
 	public void onRTSWin() {

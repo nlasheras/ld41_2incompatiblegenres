@@ -64,7 +64,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1109018677487830}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 35.021244, y: 62.84134, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4156176986179604}
@@ -83,7 +83,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.11, y: -0.4}
+  m_Offset: {x: -0.109999895, y: 0.14896011}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -94,7 +94,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 6.27, y: 6.37}
+  m_Size: {x: 6.27, y: 5.2720795}
   m_EdgeRadius: 0
 --- !u!114 &114573530829157252
 MonoBehaviour:
@@ -108,10 +108,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitPrefab: {fileID: 1875188349111586, guid: 9c40544fbbb8240f3be99c443fbd37bd, type: 2}
-  spawnRate: 1
   enemyBase: {fileID: 21300000, guid: dd7470fb67cd3294eacf9a2c05408a96, type: 3}
   alliedBase: {fileID: 21300000, guid: 5b86172927e3dfe4287ee6665862d01b, type: 3}
   energy: 100
+  life: 0
 --- !u!212 &212686624513539036
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -85,14 +85,14 @@ public class Base : MonoBehaviour {
 	private void initialize(Faction faction) {
 		switch (faction) {
 			case Faction.FACTION_ALLIES:
-			energy = 100;
+			energy = 50;
 			life = 100;
-			spawnRate = 1.0f;
+			spawnRate = 5.0f;
 			break;
 
 			case Faction.FACTION_ENEMIES:
 			life = 200;
-			spawnRate = 1.0f;
+			spawnRate = 4.5f;
 			break;
 		}
 	}
@@ -119,6 +119,7 @@ public class Base : MonoBehaviour {
 			// For now just destroy object. Will trigger event game over to other side
 			notifyBaseDestroyed();
 			GameObject.Destroy(this.gameObject);
+			life = 0;
 		}
 	}
 

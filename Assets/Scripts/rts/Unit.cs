@@ -99,7 +99,7 @@ public class Unit : MonoBehaviour {
 			case Faction.FACTION_ENEMIES:
 				life = 10;
 				basicAttack = 2;
-				explodeAttack = 10;
+				explodeAttack = 6;
 				break;
 		}
 	}

@@ -325,7 +325,6 @@ MonoBehaviour:
   speed: 1
   blockPrefab: {fileID: 1904764422130062, guid: 5d773ef31c1c2f045b5caec0964e0bee,
     type: 2}
-  speedIncreasePerDamage: 0.1
 --- !u!4 &1723874969
 Transform:
   m_ObjectHideFlags: 0
