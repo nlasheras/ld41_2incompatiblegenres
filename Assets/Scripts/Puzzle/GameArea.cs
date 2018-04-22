@@ -19,8 +19,25 @@ public class GameArea : MonoBehaviour
 		
 	}
 
-	public void tick()
-	{
+	public void tick() { 
+		CheckLines();
+		if (CheckDefeat())
+		{
+			tetrisGame.onTetrisDefeat();
+		}
+	}
+
+	public bool CheckDefeat() {
+		for (int row = height - 1; row >= 19; --row) {
+			for (int i = 0; i < width; ++i) {
+				if (getBlock(i, row) != null)
+					return true;
+			}
+		}
+		return false;
+	}
+
+	public void CheckLines() {
 		int lineCount = 0;
 		for (int row = height - 1; row >= 0; --row)
 		{
