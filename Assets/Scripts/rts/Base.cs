@@ -146,6 +146,8 @@ public class Base : MonoBehaviour {
 					break;
 			}
 		}
+
+		rtsManager.onTetrisDefeat();
 	}
 
 	private void fetchRTSManager() {

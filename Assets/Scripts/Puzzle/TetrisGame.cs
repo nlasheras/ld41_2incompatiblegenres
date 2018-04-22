@@ -158,4 +158,23 @@ public class TetrisGame : MonoBehaviour
 		if (speed > speedIncreasePerDamage)
 			speed -= speedIncreasePerDamage;
 	}
+
+	public void onRTSWin() {
+		GameObject uiManagerObject = GameObject.Find("UIManager");
+
+		if (uiManagerObject) {
+			uiManagerObject.GetComponent<UIManager>().onGameWin();
+		}
+
+		PauseGame();
+	}
+
+	public void onRTSLose() {
+		GameObject uiManagerObject = GameObject.Find("UIManager");
+		if (uiManagerObject) {
+			uiManagerObject.GetComponent<UIManager>().onGameDefeat();
+		}
+
+		PauseGame();
+	}
 }

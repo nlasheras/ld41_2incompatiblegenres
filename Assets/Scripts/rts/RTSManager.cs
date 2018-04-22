@@ -56,10 +56,18 @@ public class RTSManager : MonoBehaviour {
 
 	public void onRTSWin() {
 		fetchTetrisGame();
+
+		if (tetrisGame != null) {
+			tetrisGame.onRTSWin();
+		}
 	}
 
 	public void onRTSLose() {
 		fetchTetrisGame();
+
+		if (tetrisGame != null) {
+			tetrisGame.onRTSLose();
+		}
 	}
 
 	public void onTetrisLine(int count) {
