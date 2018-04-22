@@ -15,6 +15,8 @@ public class TetrisGame : MonoBehaviour
 
 	public GameObject blockPrefab;
 
+	private bool playing = true;
+
 	void Start() {
 		nextPiece = getRandomPiece();
 		currentPiece = null;
@@ -22,9 +24,14 @@ public class TetrisGame : MonoBehaviour
 		gameArea = GetComponentInChildren<GameArea>();
 
 		tickTime = speed;
+
+		playing = true;
 	}
 	
 	void Update() {
+
+		if (!playing) return;
+
 		if (currentPiece == null) {
 			currentPiece = nextPiece;
 			gameArea.show(currentPiece);
@@ -110,8 +117,13 @@ public class TetrisGame : MonoBehaviour
 	}
 
 	public void onTetrisLine(int count) {
-
 	}
+
+	public void onTetrisDefeat() {
+		Debug.Log("DEFEAT!");
+		playing = false;
+		speed = 0.0f;
+	} 
 
 	public void onBaseDamaged(int life) { 
 
