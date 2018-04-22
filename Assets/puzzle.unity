@@ -154,6 +154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1e1229d7e8cac84ba6f60be8a55742e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tetrisGame: {fileID: 1723874968}
   width: 10
   height: 25
 --- !u!1 &490821304
