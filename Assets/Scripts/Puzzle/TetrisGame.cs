@@ -120,9 +120,13 @@ public class TetrisGame : MonoBehaviour
 	}
 
 	public void onTetrisDefeat() {
-		Debug.Log("DEFEAT!");
 		playing = false;
 		speed = 0.0f;
+
+		GameObject uiManagerObject = GameObject.Find("UIManager");
+		if (uiManagerObject) {
+			uiManagerObject.GetComponent<UIManager>().onTetrisDefeat();
+		}
 	} 
 
 	public void onBaseDamaged(int life) { 
