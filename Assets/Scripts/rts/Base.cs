@@ -20,7 +20,7 @@ public class Base : MonoBehaviour {
 
 	private Faction faction;
 
-	[SerializeField] private RTSManager rtsManager;
+	private RTSManager rtsManager;
 
 	private Vector3 target;
 
@@ -93,22 +93,49 @@ public class Base : MonoBehaviour {
 		// TODO: Trigger damage receive info to other side
 		if (life <= 0) {
 			// For now just destroy object. Will trigger event game over to other side
+			notifyBaseDestroyed();
 			GameObject.Destroy(this.gameObject);
 		}
 	}
 
-public void notifyDamage(int damage) {
-	if (faction == Faction.FACTION_ENEMIES) {
-		return;
+	private void notifyDamage(int damage) {
+		if (faction == Faction.FACTION_ENEMIES) {
+			return;
+		}
+
+		fetchRTSManager();
+
+		if (rtsManager != null) {
+			rtsManager.onBaseDamaged(damage);
+		}
 	}
 
-	GameObject go = GameObject.Find("RTSManager");
-	RTSManager manager = go.GetComponent<RTSManager>();
+	private void notifyBaseDestroyed() {
+		fetchRTSManager();
 
-	if (manager != null) {
-		manager.onBaseDamaged(damage);
+		if (rtsManager != null) {
+			switch (faction) {
+				case Faction.FACTION_ALLIES:
+					rtsManager.onRTSLose();
+					break;
+
+				case Faction.FACTION_ENEMIES:
+					rtsManager.onRTSWin();
+					break;
+			}
+		}
 	}
-}
+
+	private void fetchRTSManager() {
+		if (rtsManager == null) {
+			GameObject go = GameObject.Find("RTSManager");
+
+			if (go != null) {
+				rtsManager = go.GetComponent<RTSManager>();
+			}
+		}
+	}
+
 	public void replenishEnergy(int count) {
 		int deltaEnergy = Unit.getUnitCost(faction);
 

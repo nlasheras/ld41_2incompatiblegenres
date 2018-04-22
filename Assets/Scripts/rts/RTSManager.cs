@@ -40,7 +40,7 @@ public class RTSManager : MonoBehaviour {
 
 	private TetrisGame tetrisGame = null;
 
-	public void onBaseDamaged(int damage) {
+	private void fetchTetrisGame() {
 		if (tetrisGame == null) {
 			GameObject go = GameObject.Find("TetrisGame");
 
@@ -48,11 +48,23 @@ public class RTSManager : MonoBehaviour {
 				tetrisGame = go.GetComponent<TetrisGame>();
 			}
 		}
+	}
+	public void onBaseDamaged(int damage) {
+		fetchTetrisGame();
 
 		if (tetrisGame != null) {
 			tetrisGame.onBaseDamaged(damage);
 		}
-}
+	}
+
+	public void onRTSWin() {
+		fetchTetrisGame();
+	}
+
+	public void onRTSLose() {
+		fetchTetrisGame();
+	}
+
 	public void onTetrisLine(int count) {
 		playerBase.replenishEnergy(count);
 	}
