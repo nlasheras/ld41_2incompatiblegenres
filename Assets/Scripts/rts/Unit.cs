@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Unit : MonoBehaviour {
 	public int life;
-	public int basicDamage;
+	private int basicAttack;
 
-	public int autodestruct;
+	public int explodeAttack;
 
 	public Sprite alliedBasicUnit;
 
@@ -19,13 +19,11 @@ public class Unit : MonoBehaviour {
 
 	private bool isPaused;
 
-	// Use this for initialization
 	void Start() {
 		GetComponentInChildren<SpriteRenderer>().sprite = getFactionSprite(faction);
-		setInitialLife(faction);
+		initialize(faction);
 	}
 
-	// Update is called once per frame
 	void Update() {
 		if (isPaused) {
 			return;
@@ -43,7 +41,7 @@ public class Unit : MonoBehaviour {
 	}
 
 	public void attack(Unit other) {
-		other.receiveDamage(basicDamage);
+		other.receiveDamage(basicAttack);
 	}
 
 	public void receiveDamage(int damage) {
@@ -90,14 +88,18 @@ public class Unit : MonoBehaviour {
 		transform.position += lateral * Random.Range(-10.0f, 10.0f) * Time.deltaTime;
 	}
 
-	private void setInitialLife(Faction faction) {
+	private void initialize(Faction faction) {
 		switch (faction) {
 			case Faction.FACTION_ALLIES:
 				life = 12;
+				basicAttack = 2;
+				explodeAttack = 10;
 				break;
 
 			case Faction.FACTION_ENEMIES:
 				life = 10;
+				basicAttack = 2;
+				explodeAttack = 10;
 				break;
 		}
 	}

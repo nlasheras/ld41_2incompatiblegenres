@@ -6,7 +6,7 @@ using UnityEngine;
 public class Base : MonoBehaviour {
 	public GameObject unitPrefab;
 
-	public float spawnRate; // seconds per unit
+	private float spawnRate; // seconds per unit
 
 	public Sprite enemyBase;
 
@@ -87,10 +87,12 @@ public class Base : MonoBehaviour {
 			case Faction.FACTION_ALLIES:
 			energy = 100;
 			life = 100;
+			spawnRate = 1.0f;
 			break;
 
 			case Faction.FACTION_ENEMIES:
 			life = 200;
+			spawnRate = 1.0f;
 			break;
 		}
 	}
@@ -232,7 +234,7 @@ public class Base : MonoBehaviour {
 			return;
 		}
 
-		receiveDamage(unit.autodestruct);
+		receiveDamage(unit.explodeAttack);
 		GameObject.Destroy(other.gameObject);
 	}
 
