@@ -14,11 +14,13 @@ public class Base : MonoBehaviour {
 
 	public int energy;
 
-	private int life;
+	public int life;
 
 	private float tick;
 
 	private Faction faction;
+
+	[SerializeField] private RTSManager rtsManager;
 
 	private Vector3 target;
 
@@ -26,6 +28,7 @@ public class Base : MonoBehaviour {
 	void Start() {
 		tick = spawnRate;
 		GetComponentInChildren<SpriteRenderer>().sprite = getFactionSprite(faction);
+		initialize(faction);
 	}
 
 	// Update is called once per frame
@@ -54,7 +57,7 @@ public class Base : MonoBehaviour {
 
 		++instanceId;
 
-		receiveDamage(Unit.getUnitCost(faction));
+		spendEnergy(Unit.getUnitCost(faction));
 	}
 
 	private void initialize(Faction faction) {
@@ -83,17 +86,35 @@ public class Base : MonoBehaviour {
 	}
 
 	public void receiveDamage(int damage) {
-		energy -= damage;
+		life -= damage;
+
+		notifyDamage(damage);
 
 		// TODO: Trigger damage receive info to other side
-		if (energy <= 0) {
+		if (life <= 0) {
 			// For now just destroy object. Will trigger event game over to other side
 			GameObject.Destroy(this.gameObject);
 		}
 	}
 
+public void notifyDamage(int damage) {
+	if (faction == Faction.FACTION_ENEMIES) {
+		return;
+	}
+
+	GameObject go = GameObject.Find("RTSManager");
+	RTSManager manager = go.GetComponent<RTSManager>();
+
+	if (manager != null) {
+		manager.onBaseDamaged(damage);
+	}
+}
 	public void replenishEnergy(int energy) {
 		this.energy += energy;
+	}
+
+	public void spendEnergy(int energy) {
+		this.energy -= energy;
 	}
 
 	public void setFaction(Faction faction) {
