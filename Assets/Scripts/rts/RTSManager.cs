@@ -14,8 +14,8 @@ public class RTSManager : MonoBehaviour {
 	private Unit[] enemyUnits;
 	private Unit[] playerUnits;
 
-	private Base playerBase;
-	private Base enemyBase;
+	public Base playerBase;
+	public Base enemyBase;
 
 	// Use this for initialization
 	void Start() {

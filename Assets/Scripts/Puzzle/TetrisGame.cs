@@ -134,10 +134,14 @@ public class TetrisGame : MonoBehaviour
 		}
 	}
 
-	public void onTetrisDefeat() {
+	public void PauseGame() {
 		playing = false;
 		speed = 0.0f;
+	}
 
+	public void onTetrisDefeat() {
+		PauseGame();
+		
 		GameObject uiManagerObject = GameObject.Find("UIManager");
 		if (uiManagerObject) {
 			uiManagerObject.GetComponent<UIManager>().onGameDefeat();
