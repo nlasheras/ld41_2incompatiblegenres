@@ -9,9 +9,12 @@ public class Base : MonoBehaviour {
 	public float spawnRate; // seconds per unit
 
 	public Sprite enemyBase;
+
 	public Sprite alliedBase;
 
 	public int energy;
+
+	private int life;
 
 	private float tick;
 
@@ -54,14 +57,15 @@ public class Base : MonoBehaviour {
 		receiveDamage(Unit.getUnitCost(faction));
 	}
 
-	private void setInitialEnergy(Faction faction) {
+	private void initialize(Faction faction) {
 		switch (faction) {
 			case Faction.FACTION_ALLIES:
 			energy = 100;
+			life = 100;
 			break;
 
 			case Faction.FACTION_ENEMIES:
-			energy = 200;
+			life = 200;
 			break;
 		}
 	}
@@ -69,10 +73,10 @@ public class Base : MonoBehaviour {
 	private static float getOffset(Faction faction) {
 		switch (faction) {
 			case Faction.FACTION_ENEMIES:
-				return -5.0f;
+				return -1.0f;
 
 			case Faction.FACTION_ALLIES:
-				return 5.0f;
+				return 1.0f;
 		}
 
 		return 0.0f;
@@ -86,6 +90,10 @@ public class Base : MonoBehaviour {
 			// For now just destroy object. Will trigger event game over to other side
 			GameObject.Destroy(this.gameObject);
 		}
+	}
+
+	public void replenishEnergy(int energy) {
+		this.energy += energy;
 	}
 
 	public void setFaction(Faction faction) {
