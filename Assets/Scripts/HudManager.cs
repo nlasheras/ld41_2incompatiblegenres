@@ -28,7 +28,7 @@ public class HudManager : MonoBehaviour
 			energy.text = String.Format("ENERGY: {0}", playerBase.energy);
 
 			var enemyBase = rtsManager.enemyBase;
-			enemyHp.text = String.Format("ALIEN BASE\n{0}", enemyBase.life);
+			enemyHp.text = String.Format("ALIEN BASE\n HP: {0}", enemyBase.life);
 		}
 	}
 }
