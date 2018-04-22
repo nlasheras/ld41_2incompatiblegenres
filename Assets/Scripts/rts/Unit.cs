@@ -17,6 +17,8 @@ public class Unit : MonoBehaviour {
 	private Faction faction;
 	private Vector3 target;
 
+	private bool isPaused;
+
 	// Use this for initialization
 	void Start() {
 		GetComponentInChildren<SpriteRenderer>().sprite = getFactionSprite(faction);
@@ -25,7 +27,19 @@ public class Unit : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update() {
+		if (isPaused) {
+			return;
+		}
+
 		move();
+	}
+
+	public void pause() {
+		isPaused = true;
+	}
+
+	public void resume() {
+		isPaused = false;
 	}
 
 	public void attack(Unit other) {

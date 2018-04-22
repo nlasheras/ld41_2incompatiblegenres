@@ -11,9 +11,6 @@ public class RTSManager : MonoBehaviour {
 
 	public GameObject basePrefab;
 
-	private Unit[] enemyUnits;
-	private Unit[] playerUnits;
-
 	public Base playerBase;
 	public Base enemyBase;
 
@@ -67,5 +64,10 @@ public class RTSManager : MonoBehaviour {
 
 	public void onTetrisLine(int count) {
 		playerBase.replenishEnergy(count);
+	}
+
+	public void onTetrisDefeat() {
+		playerBase.pause();
+		enemyBase.pause();
 	}
 }

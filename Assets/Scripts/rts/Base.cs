@@ -24,6 +24,8 @@ public class Base : MonoBehaviour {
 
 	private Vector3 target;
 
+	private bool isPaused;
+
 	// Use this for initialization
 	void Start() {
 		tick = spawnRate;
@@ -33,11 +35,31 @@ public class Base : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update() {
+		if (isPaused) {
+			return;
+		}
+
 		tick -= Time.deltaTime;
 
 		if (tick < 0 && spawnRate != 0) {
 			tick = spawnRate;
 			spawnUnit();
+		}
+	}
+
+	public void pause() {
+		isPaused = true;
+
+		foreach (GameObject unitObject in getUnits()) {
+			unitObject.GetComponent<Unit>().pause();
+		}
+	}
+
+	public void resume() {
+		isPaused = false;
+
+		foreach (GameObject unitObject in getUnits()) {
+			unitObject.GetComponent<Unit>().resume();
 		}
 	}
 
@@ -206,5 +228,9 @@ public class Base : MonoBehaviour {
 
 		receiveDamage(unit.autodestruct);
 		GameObject.Destroy(other.gameObject);
+	}
+
+	private GameObject[] getUnits() {
+		return GameObject.FindGameObjectsWithTag("Base unit");
 	}
 }

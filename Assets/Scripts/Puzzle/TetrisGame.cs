@@ -146,6 +146,11 @@ public class TetrisGame : MonoBehaviour
 		if (uiManagerObject) {
 			uiManagerObject.GetComponent<UIManager>().onGameDefeat();
 		}
+
+		GameObject rtsManagerObject = GameObject.Find("RTSManager");
+		if (rtsManagerObject) {
+			rtsManagerObject.GetComponent<RTSManager>().onTetrisDefeat();
+		}
 	}
 
 	public float speedIncreasePerDamage = 0.05f;
