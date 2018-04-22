@@ -5,6 +5,8 @@ using UnityEngine.EventSystems;
 
 public class GameArea : MonoBehaviour
 {
+	[SerializeField] private TetrisGame tetrisGame;
+
 	private Block[] blocks;
 
 	public int width = 10;
@@ -17,7 +19,9 @@ public class GameArea : MonoBehaviour
 		
 	}
 
-	public void tick() {
+	public void tick()
+	{
+		int lineCount = 0;
 		for (int row = height - 1; row >= 0; --row)
 		{
 			bool fullLine = true;
@@ -29,6 +33,7 @@ public class GameArea : MonoBehaviour
 
 			if (fullLine)
 			{
+				++lineCount;
 				for (int i = 0; i < width; ++i) {
 					Block b = blocks[row * width + i];
 					if (b) {
@@ -52,6 +57,10 @@ public class GameArea : MonoBehaviour
 			}
 		}
 
+		if (lineCount > 0)
+		{
+			tetrisGame.onTetrisLine(lineCount);
+		}
 	}
 
 	public bool isGrounded(Tetrimino piece) {

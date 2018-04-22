@@ -108,4 +108,12 @@ public class TetrisGame : MonoBehaviour
 
 		gameArea.tick();
 	}
+
+	public void onTetrisLine(int count) {
+
+	}
+
+	public void onBaseDamaged(int life) { 
+
+	}
 }
