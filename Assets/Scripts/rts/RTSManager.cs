@@ -19,12 +19,12 @@ public class RTSManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start() {
-		Vector3 playerPosition = new Vector3(12.6f, 0, 0);
+		Vector3 playerPosition = new Vector3(32f, 0, 0);
 		GameObject go = Instantiate(basePrefab, playerPosition, transform.rotation);
 		playerBase = go.GetComponent<Base>();
 		playerBase.setFaction(Faction.FACTION_ALLIES);
 
-		Vector3 enemyPosition = new Vector3(50, 50, 0);
+		Vector3 enemyPosition = new Vector3(32, 50, 0);
 		go = Instantiate(basePrefab, enemyPosition, transform.rotation);
 		enemyBase = go.GetComponent<Base>();
 		enemyBase.setFaction(Faction.FACTION_ENEMIES);

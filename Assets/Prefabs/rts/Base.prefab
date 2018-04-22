@@ -65,7 +65,7 @@ Transform:
   m_GameObject: {fileID: 1109018677487830}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 6, y: 6, z: 6}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4156176986179604}
   m_Father: {fileID: 0}
@@ -108,7 +108,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitPrefab: {fileID: 1875188349111586, guid: 9c40544fbbb8240f3be99c443fbd37bd, type: 2}
-  spawnRate: 2
+  spawnRate: 1
+  enemyBase: {fileID: 21300000, guid: dd7470fb67cd3294eacf9a2c05408a96, type: 3}
+  alliedBase: {fileID: 21300000, guid: 5b86172927e3dfe4287ee6665862d01b, type: 3}
   energy: 100
 --- !u!212 &212686624513539036
 SpriteRenderer:

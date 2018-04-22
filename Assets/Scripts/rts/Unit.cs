@@ -8,6 +8,10 @@ public class Unit : MonoBehaviour {
 
 	public int autodestruct;
 
+	public Sprite alliedBasicUnit;
+
+	public Sprite enemyBasicUnit;
+
 	public float speed;
 
 	private Faction faction;
@@ -16,7 +20,6 @@ public class Unit : MonoBehaviour {
 	// Use this for initialization
 	void Start() {
 		GetComponentInChildren<SpriteRenderer>().sprite = getFactionSprite(faction);
-		GetComponentInChildren<SpriteRenderer>().color = Base.getFactionColor(faction);
 	}
 
 	// Update is called once per frame
@@ -54,7 +57,7 @@ public class Unit : MonoBehaviour {
 
 	public static int getUnitCost(Faction faction) {
 		if (faction == Faction.FACTION_ALLIES) {
-			return 2;
+			return 1;
 		}
 
 		return 0;
@@ -72,13 +75,13 @@ public class Unit : MonoBehaviour {
 		transform.position += lateral * Random.Range(-10.0f, 10.0f) * Time.deltaTime;
 	}
 
-	private static Sprite getFactionSprite(Faction faction) {
+	private Sprite getFactionSprite(Faction faction) {
 		switch (faction) {
 			case Faction.FACTION_ALLIES:
-				return Resources.Load("alliedBasicUnit", typeof(Sprite)) as Sprite;
+				return alliedBasicUnit;
 
 			case Faction.FACTION_ENEMIES:
-				return Resources.Load("enemyBasicUnit", typeof(Sprite)) as Sprite;
+				return enemyBasicUnit;
 		}
 
 		return null;

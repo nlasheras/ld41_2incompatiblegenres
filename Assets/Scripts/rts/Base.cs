@@ -8,6 +8,9 @@ public class Base : MonoBehaviour {
 
 	public float spawnRate; // seconds per unit
 
+	public Sprite enemyBase;
+	public Sprite alliedBase;
+
 	public int energy;
 
 	private float tick;
@@ -54,11 +57,11 @@ public class Base : MonoBehaviour {
 	private void setInitialEnergy(Faction faction) {
 		switch (faction) {
 			case Faction.FACTION_ALLIES:
-			energy = 200;
+			energy = 100;
 			break;
 
 			case Faction.FACTION_ENEMIES:
-			energy = 500;
+			energy = 200;
 			break;
 		}
 	}
@@ -85,19 +88,6 @@ public class Base : MonoBehaviour {
 		}
 	}
 
-	public static Color getFactionColor(Faction faction) {
-		switch(faction) {
-			case Faction.FACTION_ALLIES:
-				return Color.blue;
-
-			case Faction.FACTION_ENEMIES:
-				return Color.red;
-
-			default:
-				return Color.white;
-		}
-	}
-
 	public void setFaction(Faction faction) {
 		this.faction = faction;
 		switch(faction) {
@@ -109,17 +99,15 @@ public class Base : MonoBehaviour {
 				this.gameObject.name = String.Format("Enemy base");
 				break;
 		}
-
-		GetComponentInChildren<SpriteRenderer>().color = getFactionColor(faction);
 	}
 
-	private static Sprite getFactionSprite(Faction faction) {
+	private Sprite getFactionSprite(Faction faction) {
 		switch (faction) {
 			case Faction.FACTION_ALLIES:
-				return Resources.Load("alliedBase", typeof(Sprite)) as Sprite;
+				return alliedBase;
 
 			case Faction.FACTION_ENEMIES:
-				return Resources.Load("enemyBase", typeof(Sprite)) as Sprite;
+				return enemyBase;
 		}
 
 		return null;
