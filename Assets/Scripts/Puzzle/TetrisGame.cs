@@ -117,16 +117,20 @@ public class TetrisGame : MonoBehaviour
 	}
 
 	private RTSManager rtsManager = null;
-	public void onTetrisLine(int count) {
+	private RTSManager GetRtsManager() {
 		if (rtsManager == null) {
 			GameObject rtsManagerObject = GameObject.Find("RTSManager");
 			if (rtsManagerObject != null) {
 				rtsManager = rtsManagerObject.GetComponent<RTSManager>();
 			}
 		}
+		return rtsManager;
+	}
 
-		if (rtsManager != null) {
-			rtsManager.onTetrisLine(count);
+	public void onTetrisLine(int count) {
+		RTSManager rts = GetRtsManager();
+		if (rts != null) {
+			rts.onTetrisLine(count);
 		}
 	}
 
@@ -136,7 +140,7 @@ public class TetrisGame : MonoBehaviour
 
 		GameObject uiManagerObject = GameObject.Find("UIManager");
 		if (uiManagerObject) {
-			uiManagerObject.GetComponent<UIManager>().onTetrisDefeat();
+			uiManagerObject.GetComponent<UIManager>().onGameDefeat();
 		}
 	}
 
